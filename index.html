@@ -10,61 +10,69 @@
   html,body{height:100%}
   body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:#fff;background:#0a0a0a;overflow:hidden}
 
+  /* Logo principal qui s'efface au début du swipe */
   .logo-big{position:fixed;top:24px;left:50%;transform:translateX(-50%);height:360px;z-index:80;pointer-events:none;filter:drop-shadow(0 10px 28px rgba(0,0,0,.35));opacity:1;transition:opacity .25s ease}
   @media (max-width:560px){.logo-big{height:260px}}
 
+  /* Viewport horizontal avec snap */
   .viewport{position:fixed;inset:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;display:grid;grid-auto-flow:column;grid-auto-columns:100vw;width:100vw;height:100vh;scroll-snap-type:x mandatory;scroll-behavior:smooth;touch-action:pan-x;-webkit-overflow-scrolling:touch}
   .viewport::-webkit-scrollbar{display:none}
   .panel{position:relative;height:100vh;width:100vw;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:160px 24px 24px;gap:14px}
 
+  /* Landing avec le fondu jaune à droite */
   .panel.landing{background:radial-gradient(60% 60% at 50% 40%,#151515 0%,#0a0a0a 60%,#070707 100%)}
   .panel.landing::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(100deg,rgba(255,252,0,0) 55%,rgba(255,252,0,.25) 65%,rgba(255,252,0,.55) 73%,rgba(255,252,0,.80) 81%,#fffc00 88%,#fffc00 100%)}
 
-  /* Logos remontés + clickable */
-  .landing-icons{
-    position:absolute;left:50%;bottom:180px;transform:translateX(-50%);
-    display:flex;gap:min(8vw,44px);--base:min(14vw,72px)
-  }
-  .landing-icons img{
-    height:auto;filter:drop-shadow(0 10px 24px rgba(0,0,0,.35));
-    cursor:pointer;transition:transform .18s ease, opacity .18s ease
-  }
-  .landing-icons .insta{width:calc(var(--base)*1.1)}
-  .landing-icons .snap{width:var(--base)}
-  .landing-icons .tt{width:calc(var(--base)*0.9)} /* TikTok un peu plus petit */
+  /* Logos réseaux sur la landing */
+  .landing-icons{position:absolute;left:50%;bottom:160px;transform:translateX(-50%);display:flex;align-items:center;gap:min(8vw,44px)}
+  .landing-icons img{filter:drop-shadow(0 10px 24px rgba(0,0,0,.35));cursor:pointer;transition:transform .18s ease,opacity .18s ease}
   .landing-icons img:hover{transform:translateY(-2px);opacity:.92}
+  /* Tailles par HAUTEUR pour garder les proportions et l’égalité visuelle */
+  .landing-icons .insta{height:72px}
+  .landing-icons .snap {height:64px}
+  .landing-icons .tt   {height:64px}
 
-  .swipe-hint{position:absolute;left:50%;bottom:100px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px}
+  /* Indication de swipe (flèche au-dessus, barre en dessous) */
+  .swipe-hint{position:absolute;left:50%;bottom:90px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px}
   .swipe-hint span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
   .swipe-hint svg{width:22px;height:22px;filter:drop-shadow(0 0 6px rgba(0,255,200,.65)) drop-shadow(0 0 12px rgba(0,255,200,.35));animation:wiggle 1.6s ease-in-out infinite}
   .swipe-hint path{stroke:#a8fff3;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
   @keyframes wiggle{0%{transform:translateX(-6px)}50%{transform:translateX(6px)}100%{transform:translateX(-6px)}}
-
-  .home-indicator{position:absolute;left:50%;bottom:72px;transform:translateX(-50%);width:160px;height:6px;border-radius:999px;background:rgba(255,255,255,.16);overflow:hidden}
+  .home-indicator{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);width:160px;height:6px;border-radius:999px;background:rgba(255,255,255,.16);overflow:hidden}
   .home-indicator::after{content:"";position:absolute;inset:0;width:40%;background:rgba(255,255,255,.35);border-radius:999px;animation:hint 1.8s ease-in-out infinite}
   @keyframes hint{0%{left:-40%}50%{left:60%}100%{left:-40%}}
 
+  /* Pages Snap / Insta / TikTok */
   .panel.snap{background:#fffc00;color:#000;position:relative}
   .panel.snap::after{content:"";position:absolute;inset:0;left:min(14vw,200px);background:radial-gradient(60% 60% at 50% 40%,rgba(0,0,0,.06) 0%,rgba(0,0,0,0) 60%);pointer-events:none}
 
-  .panel.insta{background:
+  .panel.insta{
+    background:
       radial-gradient(80% 80% at 70% 20%, rgba(79,91,213,.22) 0%, transparent 52%),
       radial-gradient(70% 70% at 25% 70%, rgba(246,41,102,.20) 0%, transparent 56%),
-      linear-gradient(135deg,#f3cc70 0%,#f58a3a 30%,#ce2f74 60%,#8b3ec0 85%,#4f5bd5 100%)}
+      linear-gradient(135deg,#f3cc70 0%,#f58a3a 30%,#ce2f74 60%,#8b3ec0 85%,#4f5bd5 100%);
+    color:#fff
+  }
 
-  .panel.tiktok{background:
+  .panel.tiktok{
+    background:
       radial-gradient(70% 70% at 80% 85%, rgba(0,242,234,.18) 0%, transparent 55%),
       radial-gradient(60% 60% at 15% 20%, rgba(255,0,80,.12) 0%, transparent 60%),
-      linear-gradient(135deg,#000 40%,#0b0b0b 100%)}
+      linear-gradient(135deg,#000 40%, #0b0b0b 100%);
+    color:#fff
+  }
 
+  /* Contenu des pages réseaux */
   .brand-img{width:min(32vw,140px);height:auto;filter:drop-shadow(0 12px 28px rgba(0,0,0,.25))}
-  .headline{font-size:clamp(26px,5vw,52px);font-weight:800;text-align:center;margin-top:8px;color:currentColor}
-  .sub{font-size:clamp(14px,2.5vw,18px);opacity:.85;text-align:center;max-width:680px;color:currentColor}
+  .headline{font-size:clamp(26px,5vw,52px);font-weight:800;text-align:center;margin-top:8px}
+  .sub{font-size:clamp(14px,2.5vw,18px);opacity:.85;text-align:center;max-width:680px}
 
+  /* Formulaire username + bouton */
   .form{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:14px;width:100%}
   .username{--bg:rgba(255,255,255,.10);--bd:rgba(255,255,255,.22);position:relative;display:flex;align-items:center;gap:10px;width:min(70vw,460px);height:54px;border-radius:14px;background:var(--bg);border:1px solid var(--bd);backdrop-filter:blur(10px);padding:0 14px 0 48px;box-shadow:0 8px 28px rgba(0,0,0,.22) inset,0 1px 0 rgba(255,255,255,.08)}
-  .username .at{position:absolute;left:16px;font-weight:700;opacity:.9;color:currentColor}
+  .username .at{position:absolute;left:16px;font-weight:700;opacity:.9}
   .username input{flex:1;height:100%;background:transparent;border:0;outline:0;color:#fff;font-size:16px}
+  .panel.snap .username input{color:#000}
   .username .status{width:22px;height:22px;display:grid;place-items:center}
   .spinner{width:18px;height:18px;border:3px solid rgba(255,255,255,.25);border-top-color:#111;border-radius:50%;animation:spin .7s linear infinite}
   .check{width:18px;height:18px;border-radius:50%;background:#111;display:grid;place-items:center}
@@ -72,14 +80,15 @@
   @keyframes spin{to{transform:rotate(360deg)}}
   .btn{height:54px;min-width:140px;padding:0 18px;border-radius:14px;border:0;cursor:pointer;background:#111;color:#fff;font-weight:800;letter-spacing:.2px;box-shadow:0 10px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.08)}
   .btn:active{transform:translateY(1px)}
+  .panel.snap .btn{background:#111;color:#fff}
 
   @media (max-width:640px){
     .form{flex-direction:column;align-items:center}
     .username{width:min(92vw,520px);height:52px}
     .btn{width:min(92vw,520px);height:52px}
     .landing-icons{bottom:168px}
-    .swipe-hint{bottom:92px}
-    .home-indicator{bottom:64px}
+    .swipe-hint{bottom:90px}
+    .home-indicator{bottom:58px}
   }
 </style>
 </head>
@@ -96,12 +105,9 @@
       </div>
 
       <div class="swipe-hint" aria-hidden="true">
-        <span>swipe</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 12h14m-4-4 4 4-4 4"/>
-        </svg>
+        <span>SWIPE</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14m-4-4 4 4-4 4"/></svg>
       </div>
-
       <div class="home-indicator" aria-hidden="true"></div>
     </section>
 
@@ -138,7 +144,7 @@
     <!-- 3: TIKTOK -->
     <section class="panel tiktok" aria-label="TikTok" id="tiktok">
       <img class="brand-img" src="tiktok.png" alt="TikTok">
-      <h1 class="headline">Supprimer un compte Tiktok</h1>
+      <h1 class="headline">Supprimer un compte TikTok</h1>
       <p class="sub">Tapes un nom d'utilisateur</p>
       <form class="form" data-network="tiktok" onsubmit="return goNext(event)">
         <div class="username">
@@ -157,29 +163,29 @@
   const logo=document.querySelector('.logo-big');
   const clamp01=x=>Math.max(0,Math.min(1,x));
 
-  // fondu logo rapide
+  // Fondu du logo sur les tout premiers pixels de swipe
   function onScroll(){ const t=clamp01(vp.scrollLeft/(innerWidth*0.25)); logo.style.opacity=1-t; }
   vp.addEventListener('scroll',onScroll,{passive:true}); onScroll();
 
-  // logos cliquables -> scroll vers section
-  const scrollTo = (id)=>document.getElementById(id).scrollIntoView({behavior:'smooth',inline:'start',block:'nearest'});
-  document.getElementById('go-snap').addEventListener('click',()=>scrollTo('snap'));
-  document.getElementById('go-insta').addEventListener('click',()=>scrollTo('insta'));
-  document.getElementById('go-tt').addEventListener('click',()=>scrollTo('tiktok'));
+  // Logos landing cliquables -> scroll vers la section correspondante
+  const to = id => document.getElementById(id).scrollIntoView({behavior:'smooth',inline:'start'});
+  document.getElementById('go-snap').addEventListener('click',()=>to('snap'));
+  document.getElementById('go-insta').addEventListener('click',()=>to('insta'));
+  document.getElementById('go-tt').addEventListener('click',()=>to('tiktok'));
 
-  // spinner -> coche
+  // Barre username : spinner pendant la frappe puis coche
   const bars=document.querySelectorAll('.username');
   const CHECK_SVG='<svg viewBox="0 0 24 24"><path d="M20.285 6.709a1 1 0 0 1 0 1.414l-9.192 9.192a1 1 0 0 1-1.414 0L3.715 12.56a1 1 0 1 1 1.414-1.414l4.04 4.04 8.485-8.485a1 1 0 0 1 1.414 0z" fill="#fff"/></svg>';
   bars.forEach(bar=>{
-    const input=bar.querySelector('input'),status=bar.querySelector('.status');let to=null;
+    const input=bar.querySelector('input'), status=bar.querySelector('.status'); let to=null;
     const spin=()=>{status.innerHTML='';const s=document.createElement('div');s.className='spinner';status.appendChild(s);}
     const chk =()=>{status.innerHTML='';const c=document.createElement('div');c.className='check';c.innerHTML=CHECK_SVG;status.appendChild(c);}
     const clr =()=>{status.innerHTML='';}
-    input.addEventListener('input',()=>{clearTimeout(to);if(!input.value.trim()){clr();return;}spin();to=setTimeout(chk,650);});
-    input.addEventListener('blur',()=>{clearTimeout(to);if(input.value.trim())chk();else clr();});
+    input.addEventListener('input',()=>{clearTimeout(to); if(!input.value.trim()){clr();return;} spin(); to=setTimeout(chk,650);});
+    input.addEventListener('blur', ()=>{clearTimeout(to); if(input.value.trim()) chk(); else clr();});
   });
 
-  // redirections
+  // Redirections après validation
   window.goNext=function(e){
     e.preventDefault();
     const form=e.target.closest('form');
@@ -197,3 +203,4 @@
 </script>
 </body>
 </html>
+
